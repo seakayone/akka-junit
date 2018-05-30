@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.typesafe.akka:akka-actor_2.12:2.5.13'
+    compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+    compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+
+    testCompile 'org.junit.jupiter:junit-jupiter-params:5.2.0'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+    testCompile 'org.assertj:assertj-core:3.10.0'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+wrapper.gradleVersion = '4.7'
