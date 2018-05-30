@@ -1,0 +1,24 @@
+
+image:https://travis-ci.org/seakayone/akka-junit.svg?branch=master["Build Status", link="https://travis-ci.org/seakayone/akka-junit"]
+
+# Junit5 Extension for Akka
+
+# Usage
+
+[source, java]
+--
+@ExtendWith(AkkaJunitExtension.class)
+@AkkaJunitExtensionConfig(name = "test")
+class SomeAkkaJunit5Test {
+
+    @Test
+    void system_is_present(ActorSystem system){
+        assertThat(system).isNotNull();
+    }
+
+    @Test
+    void system_has_name(ActorSystem system){
+        assertThat(system.name()).isEqualTo("test");
+    }
+}
+--
