@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     compile 'com.typesafe.akka:akka-stream_2.12:2.5.13'
+    compile 'com.typesafe.akka:akka-testkit_2.12:2.5.13'
     compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
 
