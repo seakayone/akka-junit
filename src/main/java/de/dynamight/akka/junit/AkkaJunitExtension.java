@@ -1,6 +1,7 @@
 package de.dynamight.akka.junit;
 
 import akka.actor.ActorSystem;
+import akka.stream.ActorMaterializer;
 import org.junit.jupiter.api.extension.*;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
@@ -18,6 +19,9 @@ public class AkkaJunitExtension implements BeforeAllCallback, AfterAllCallback, 
     final AkkaJunitExtensionConfig config = getAkkaConfig(context);
     final ActorSystem system = ActorSystem.create(config.name());
     store.put(ActorSystem.class, system);
+    if (config.materializer()) {
+      store.put(ActorMaterializer.class, ActorMaterializer.create(system));
+    }
   }
 
   private AkkaJunitExtensionConfig getAkkaConfig(ExtensionContext context) {
@@ -34,6 +38,10 @@ public class AkkaJunitExtension implements BeforeAllCallback, AfterAllCallback, 
   @Override
   public void afterAll(ExtensionContext context) {
     final Store store = getStore(context);
+    final AkkaJunitExtensionConfig config = getAkkaConfig(context);
+    if (config.materializer()) {
+      getActorMaterializer(store).shutdown();
+    }
     getActorSystem(store).terminate();
   }
 
@@ -41,10 +49,14 @@ public class AkkaJunitExtension implements BeforeAllCallback, AfterAllCallback, 
     return (ActorSystem) store.get(ActorSystem.class);
   }
 
+  private ActorMaterializer getActorMaterializer(Store store) {
+    return (ActorMaterializer) store.get(ActorMaterializer.class);
+  }
+
   @Override
-  public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-    return parameterContext.getParameter()
-      .getType().equals(ActorSystem.class);
+  public boolean supportsParameter(ParameterContext paramContext, ExtensionContext context) throws ParameterResolutionException {
+    final Class<?> type = paramContext.getParameter().getType();
+    return type.equals(ActorSystem.class) || type.equals(ActorMaterializer.class);
   }
 
   @Override

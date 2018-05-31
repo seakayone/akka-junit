@@ -11,4 +11,5 @@ public @interface AkkaJunitExtensionConfig {
 
   String name() default "default";
 
+  boolean materializer() default true;
 }
