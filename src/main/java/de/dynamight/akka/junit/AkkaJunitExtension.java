@@ -3,7 +3,6 @@ package de.dynamight.akka.junit;
 import akka.actor.ActorSystem;
 import akka.stream.ActorMaterializer;
 import akka.testkit.javadsl.TestKit;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
