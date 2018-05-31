@@ -8,14 +8,19 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    compile 'com.typesafe.akka:akka-stream_2.12:2.5.13'
-    compile 'com.typesafe.akka:akka-testkit_2.12:2.5.13'
-    compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
-    compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+ext {
+    scalaVersion = '2.12'
+    akkaVersion = '2.5.13'
+    junitVersion = '5.2.0'
+}
 
-    testCompile 'org.junit.jupiter:junit-jupiter-params:5.2.0'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+dependencies {
+    compile "com.typesafe.akka:akka-stream_$scalaVersion:$akkaVersion"
+    compile "com.typesafe.akka:akka-testkit_$scalaVersion:$akkaVersion"
+    compile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    compile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testCompile "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testCompile 'org.assertj:assertj-core:3.10.0'
 }
 
