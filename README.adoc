@@ -20,5 +20,10 @@ class SomeAkkaJunit5Test {
     void system_has_name(ActorSystem system){
         assertThat(system.name()).isEqualTo("test");
     }
+
+    @Test
+    void actormaterializer_is_present(ActorMaterializer mat) {
+        assertThat(mat).isNotNull();
+    }
 }
 --
