@@ -10,8 +10,8 @@ repositories {
 
 ext {
     scalaVersion = '2.12'
-    akkaVersion = '2.5.13'
-    junitVersion = '5.2.0'
+    akkaVersion = '2.5.18'
+    junitVersion = '5.3.1'
 }
 
 dependencies {
@@ -31,4 +31,4 @@ test {
     }
 }
 
-wrapper.gradleVersion = '4.7'
+wrapper.gradleVersion = '4.10.2'
